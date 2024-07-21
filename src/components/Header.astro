@@ -15,10 +15,16 @@ const { title, pubDate, updatedDate, tags } = Astro.props;
       <dt>公開日</dt>
       <dd><time>{pubDate}</time></dd>
     </div>
-    <div>
-      <dt>更新日</dt>
-      <dd><time>{updatedDate}</time></dd>
-    </div>
+    {
+      pubDate !== updatedDate && (
+        <div>
+          <dt>更新日</dt>
+          <dd>
+            <time>{updatedDate}</time>
+          </dd>
+        </div>
+      )
+    }
     <div>
       <dt>タグ</dt>
       <dd>{tags.join(", ")}</dd>

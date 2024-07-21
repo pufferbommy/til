@@ -1,0 +1,51 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-05-09"
+updatedDate: "2024-05-09"
+title: "Reactコンポーネントが提供する要素名を利用者に伝える"
+author: ダーシノ
+description: "<InfoMessage />というコンポーネントがあったとして、そのコンポ―ネントがInformationメッセージだけを返すのか、<p>でくくって返すのか利用者からはわからない。"
+tags: ["JavaScript", "React"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+`<InfoMessage />`というコンポーネントがあったとして、そのコンポ―ネントがInformationメッセージだけを返すのか、`<p>`でくくって返すのか利用者からはわからない。
+
+```tsx
+// InfoMessageコンポーネントがどんな要素を返すかわからないので利用者側でどうマークアップすればよいか迷う
+function App() {
+  return (
+    <Notification>
+      <InfoMessage />
+    </Notification>
+  )
+  // or
+  return (
+    <Notification>
+      <p>
+        <InfoMessage />
+      </p>
+    </Notification>
+  )
+}
+```
+
+`ReactElement`タイプの第2型引数に要素名を加えることで、利用者に伝えることができる。
+
+```tsx
+function InfoMessage(): ReactElement<Props, 'p'> {
+  return <p>xxxxx</p>
+}
+
+function App() {
+  return (
+    <Notification>
+      // <p>を返すことがわかる
+      <InfoMessage />　
+    </Notification>
+  )
+}
+```
