@@ -24,4 +24,4 @@ await window.navigator.clipboard.writeText(text)
 const paste = await window.navigator.clipboard.readText()
 ```
 
-※ページにフォーカスが当たっていない場合、「DOMException: Failed to execute 'readText' on 'Clipboard': Document is not focused」というエラーになるため、Consoleからの実行はできない。
+※ページにフォーカスが当たっていない場合、`DOMException: Failed to execute 'readText' on 'Clipboard': Document is not focused`というエラーになるため、Consoleからの実行はできない。

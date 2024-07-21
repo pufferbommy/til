@@ -1,0 +1,42 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-06-13"
+updatedDate: "2024-06-13"
+title: ".d.tsは参照のみでdistには含まれない"
+author: ダーシノ
+description: "以下のような*.d.tsファイルはプロジェクト内限定の参照専用型定義ファイルのため、distディレクトリには出力されない。"
+tags: ["TypeScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+以下のような`*.d.ts`ファイルはプロジェクト内限定の参照専用型定義ファイルのため、distディレクトリには出力されない。
+```ts
+// types/global.d.ts
+declare type MyType = { ... }
+
+// types/env.d.ts
+declare module '*.css' {
+  const styles: Record<string, string>
+  export default styles
+}
+```
+
+`*.d.ts`ファイルで定義した型定義をライブラリとして提供したい場合は、`*.ts`に変更し、型をimportして使うことでdistに含まれる。
+
+```ts
+// types/global.ts
+export type MyType = { ... }
+
+// index.ts
+import type { MyType } from '../types/global.ts'
+
+type ExtendedMyType = MyType & { ... }
+```
+
+
+## 参考
+
+- [after compile \.d\.ts files will not be included in build \(outDir\) folder · Issue \#5112 · microsoft/TypeScript](https://github.com/Microsoft/TypeScript/issues/5112)

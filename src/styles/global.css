@@ -17,16 +17,15 @@ p {
   word-break: auto-phrase;
 }
 
+dt {
+  font-weight: 800;
+}
+
 pre {
   padding: 1em;
   font-size: 0.8rem;
   line-height: 1.4;
 }
-
-dt {
-  font-weight: 800;
-}
-
 code {
   font-style: italic;
   padding: 0 0.2em;
