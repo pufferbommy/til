@@ -2,6 +2,9 @@ html {
   font-size: 1.25rem;
   line-height: 1.7;
   letter-spacing: 0.05em;
+
+  color: #333333;
+  background-color: #fafafa;
 }
 
 :where(header, footer, main) {
