@@ -1,0 +1,52 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2022-07-07"
+updatedDate: "2024-05-08"
+title: "CSSだけでMasonryレイアウト（組積レイアウト）をする "
+author: ダーシノ
+description: "{ページの概要}"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+いままで[Masonryレイアウト（組積レイアウト）](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_grid_layout/Masonry_layout)をするにはJavaScriptが必須（jQueryのプラグインとか）だったが、Gridレイアウトの機能でCSSだけで実現できるようになった。
+
+
+```css
+.masonry {
+  display: grid;
+  gap: 10px;
+  /* grid-template-(rows|columns): masonry が指定可能 */
+  grid-template-rows: masonry;
+}
+```
+
+---- 
+
+## 追記:2024-04-24
+
+- [Safari TP](https://webkit.org/blog/15269/help-us-invent-masonry-layouts-for-css-grid-level-3/)がMasonryレイアウトをサポートした。
+- Firefoxは`layout.css.grid-template-masonry-value.enabled`を有効にすることで利用可能
+
+----
+
+## 追記:2024-05-08
+
+Chromeの開発チームがCSS Gridを使った[Masonryレイアウトの実装に反対の意を示した](https://developer.chrome.com/blog/masonry)。
+
+### 反対の理由
+
+1. パフォーマンス問題
+2. Grid ではなく別のレイアウトにすべき
+
+### Chromeチームの提案
+
+CSS Gridの機能ではなく、`display: masonry`でフローレイアウトの役割のひとつとして実装することを提案している。
+```css
+.masonry {
+  display: masonry;
+}
+```
