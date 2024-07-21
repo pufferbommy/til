@@ -8,6 +8,6 @@
     "**/Thumbs.db": true,
     "node_modules": true,
     ".astro": true,
-    "public": true,
+    // "public": true,
   }
 }

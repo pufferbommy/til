@@ -1,0 +1,21 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "yyyy-mm-dd"
+title: "{タイトル}"
+author: ダーシノ
+description: "{ページの概要}"
+tags: ["関連するタグ"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+ここにテキスト
+
+```ts
+const a = 'a'
+if (a) {
+  console.log(a)
+}
+```

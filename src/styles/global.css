@@ -1,8 +1,18 @@
 html {
   font-size: 1.25rem;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
 }
 
 main {
   max-width: 50ch;
   margin: auto;
+}
+
+pre {
+  padding: 1em;
+}
+
+dt {
+  font-weight: 800;
 }

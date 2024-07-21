@@ -1,7 +1,9 @@
 import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bcrikko.github.io/til',
-  base: '/til'
+  site: 'https://bcrikko.github.io',
+  base: '/til',
+  integrations: [mdx()]
 });
