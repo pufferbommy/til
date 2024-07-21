@@ -1,0 +1,43 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-05-17"
+updatedDate: "2024-05-17"
+title: "font-sizeが10px未満にしても表示できる"
+author: ダーシノ
+description: "ブラウザの最小フォントサイズは10pxだったが、0pxまで表示できるようになっている。VisuallyHiddenの代わりに使えるかも知れない。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+ブラウザの最小フォントサイズは10pxだったが、0pxまで表示できるようになっている。VisuallyHiddenの代わりに使えるかも知れない。
+
+```html
+<p style="font-size: 10px;">font-size: 10px;</p>
+<p style="font-size: 9px;">font-size: 9px;</p>
+<p style="font-size: 8px;">font-size: 8px;</p>
+<p style="font-size: 7px;">font-size: 7px;</p>
+<p style="font-size: 6px;">font-size: 6px;</p>
+<p style="font-size: 5px;">font-size: 5px;</p>
+<p style="font-size: 4px;">font-size: 4px;</p>
+<p style="font-size: 3px;">font-size: 3px;</p>
+<p style="font-size: 2px;">font-size: 2px;</p>
+<p style="font-size: 1px;">font-size: 1px;</p>
+<p style="font-size: 0px;">font-size: 0px;</p>
+```
+
+## サンプル
+
+<p style="font-size: 10px;">font-size: 10px;</p>
+<p style="font-size: 9px;">font-size: 9px;</p>
+<p style="font-size: 8px;">font-size: 8px;</p>
+<p style="font-size: 7px;">font-size: 7px;</p>
+<p style="font-size: 6px;">font-size: 6px;</p>
+<p style="font-size: 5px;">font-size: 5px;</p>
+<p style="font-size: 4px;">font-size: 4px;</p>
+<p style="font-size: 3px;">font-size: 3px;</p>
+<p style="font-size: 2px;">font-size: 2px;</p>
+<p style="font-size: 1px;">font-size: 1px;</p>
+<p style="font-size: 0px;">font-size: 0px;</p>
