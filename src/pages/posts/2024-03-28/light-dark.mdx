@@ -1,0 +1,57 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-03-28"
+updatedDate: "2024-03-28"
+title: "ライトモード/ダークモードで色を切り替える"
+author: ダーシノ
+description: "light-dark()を使うことで、ユーザー環境のカラースキームによって色が自動で切り替わる。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[light-dark()](https://developer.mozilla.org/ja/docs/Web/CSS/color_value/light-dark)を使うことで、ユーザー環境のカラースキームによって色が自動で切り替わる。
+
+Baselineに到達しているため、全主要ブラウザで利用可能。
+
+ライトモードとダークモードで使う色を一箇所で指定できるので管理がしやすくなる。以前は`prefers-color-scheme`を使ってCSS変数を切り替える処理が必要で、今使っている`--color`がどうなっているか、上書きされていないかなど知る必要があった。
+
+## After
+
+```css
+:root {
+  /* 必須のおまじない */
+  color-scheme: light dark;
+}
+
+body {
+  /* ライトモードはblack、ダークモードはwhite */
+  color: light-dark(black, white);
+  background-color: light-dark(white, black);
+}
+```
+
+## Before
+
+```css
+:root {
+  --color: black;
+  --bg-color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color: white;
+    --bg-color: black;
+  }
+}
+
+/* @media (prefers-color-scheme: light) { ... } */
+
+body {
+  color: var(--color);
+  background-color: var(--bg-color);
+}
+```
