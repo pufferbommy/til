@@ -1,0 +1,59 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-07-01"
+title: "height:0→autoをトランジションする"
+author: ダーシノ
+description: "通常height:0→autoのトランジションはできないが、calc-size()が実装されたら使えるようになる"
+tags: ["HTML", "CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+import './script'
+import './style.css'
+
+<Header {...frontmatter} />
+
+通常、`height: 0`から`height: auto`へのトランジションはできない。`height:300px`のように固定高にすればトランジションできるが、内包するコンテンツによってはバグることがある。
+
+[calc-size()](https://chromestatus.com/feature/5196713071738880)を使って`height: calc-size(auto);`とすると、内包するコンテンツの高さにあわせてトランジションできる。（※2024-07-01現在、Chrome Canaryでのみ実行可能）
+
+```html
+<button id="open">Open</button>
+<section class="panel">
+  <p>Content</p>
+</section>
+```
+
+```js
+document.getElementById('open').addEventListener('click', () => {
+  document.querySelector('.panel').classList.toggle('expanded')
+})
+```
+
+```css
+.panel {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s;
+
+  &.expanded {
+    /* トランジションしない */
+    height: auto;
+
+    /* トランジションするけど固定高で、内包するコンテンツによってはバグる*/
+    height: 300px;
+
+    /* トランジションする!!!!! */
+    height: calc-size(auto);
+  }
+}
+```
+
+----
+
+## サンプル
+
+<button id="open">Open</button>
+<section class="panel">
+  <p>Content</p>
+</section>

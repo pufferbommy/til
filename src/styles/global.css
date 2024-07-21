@@ -13,6 +13,14 @@ html {
   margin: auto;
 }
 
+h1 {
+  text-wrap: balance;
+}
+
+p {
+  word-break: auto-phrase;
+}
+
 pre {
   padding: 1em;
   font-size: 0.8rem;
