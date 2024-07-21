@@ -1,0 +1,28 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-06-06"
+updatedDate: "2024-06-06"
+title: "早まったDRY原則の適用はやめよう"
+author: ダーシノ
+description: "DRY原則は、「コード」ではなく「知識」の重複を防ぐこと。コードが重複しているから共通化しようと考えてはならない。"
+tags: ["Programming"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+DRY原則は、「コード」ではなく「知識」の重複を防ぐこと。
+
+コードが重複しているから共通化しようと考えてはならない。現時点で偶然同じコードになっているだけで概念的には違うものかもしれないからだ。
+
+> **Consider carefully if code is truly redundant or just superficially similar. 
+> コードが冗長なのか、表面的に似ているだけか慎重に考えよう**
+
+> **When designing abstractions, do not prematurely couple behaviors that may evolve separately in the longer term.
+> 長期的に別々に進化しそうなふるまいを早急に結合しないようにしよう**
+
+## 参考
+
+- [DRY原則の誤解と乱用](https://sizu.me/bc_rikko/posts/exx4k43odd67)
+- [Google Testing Blog: Don't DRY Your Code Prematurely](https://testing.googleblog.com/2024/05/dont-dry-your-code-prematurely.html)

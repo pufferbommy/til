@@ -1,0 +1,44 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-06-06"
+updatedDate: "2024-06-06"
+title: "Node.jsの引数にパスを渡すときは引用符でくくる"
+author: ダーシノ
+description: "引用符なしの場合、src/**/*.js が文字列としてではなく、このパターンに一致するパスが引数に渡ってしまう。そのため「ダメな例」で target を出力すると src/**/*.js ではなく src/index.jsという文字列になる。"
+tags: ["JavaScript", "Node.js"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+引用符なしの場合、`src/**/*.js`が文字列としてではなく、このパターンに一致するパスが引数に渡ってしまう。そのため「ダメな例」で`target`を出力すると`src/**/*.js`ではなく`src/index.js`という文字列になる。
+
+```js
+// glob.js
+import { globSync } from 'node:fs'
+import { argv } from 'node:process'
+
+const [_node, _file, target] = argv
+
+const paths = globSync(target)
+console.log(paths)
+```
+
+## ダメな例（引用符なし）
+
+```sh
+$ node glob.js src/**/*.js
+["src/index.js"]
+```
+
+## 良い例（引用符あり）
+
+```sh
+$ node glob.js 'src/**/*.js'
+[
+  "src/index.js",
+  "src/path/index.js",
+  "src/path/to/index.js"
+]
+```
