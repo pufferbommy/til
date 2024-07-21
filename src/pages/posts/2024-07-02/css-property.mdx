@@ -1,0 +1,53 @@
+---
+layout: ../../../layouts/Layout.astro
+publishedAt: "2024-07-02"
+updatedAt: "2024-07-02"
+title: "@propertyの使い所"
+author: ダーシノ
+description: "{ページの概要}"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[@property](https://developer.mozilla.org/ja/docs/Web/CSS/@property)はCSS Houdiniのひとつで、CSSカスタムプロパティを明示的に定義するために使われる。
+
+※2024-07-09に[Firefox128](https://www.mozilla.org/en-US/firefox/128.0/releasenotes/)でサポートされたことで、全主要ブラウザで利用可能になった
+
+## 使い所
+
+`@property`を使うことで、JavaScriptからCSSカスタムプロパティを参照したときに正しい値を取得できるようになる。
+
+```css
+#demo {
+  --u: cos(25deg);
+}
+```
+
+
+### `@property`を使わない場合
+
+```js
+const u = getComputedStyle(element).getPropertyValue('--u')
+console.log(u)
+```
+`cos(25deg)`という文字列が取得できる。
+
+### `@property`を使う場合
+
+```css
+@property --u {
+  /* --uカスタムプロパティが「数値」であることを宣言する */
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+```
+
+```js
+const u = getComputedStyle(element).getPropertyValue('--u')
+console.log(u)
+```
+`0.906308`という計算後の値が取得できる。
