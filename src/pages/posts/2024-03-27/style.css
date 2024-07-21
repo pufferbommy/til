@@ -1,0 +1,3 @@
+.field:focus-within label {
+  font-weight: bold;
+}
