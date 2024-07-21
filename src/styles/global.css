@@ -1,0 +1,8 @@
+html {
+  font-size: 1.25rem;
+}
+
+main {
+  max-width: 50ch;
+  margin: auto;
+}
