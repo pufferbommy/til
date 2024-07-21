@@ -1,21 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro'
-const allPosts = await Astro.glob('../pages/posts/**/*.{md,mdx}');
+import Layout from "../layouts/Layout.astro";
+const allPosts = await Astro.glob("../pages/posts/**/*.{md,mdx}");
+
 const title = "Today I learned.";
-const description = "日々学んだことを公開するサイトです。"
+const description = "日々学んだことを公開するサイトです。";
+const tags = ["frontend", "web", "javascript", "html", "css"];
 ---
-<Layout
-  title={title}
-  description={description}
-  tags={["frontend", "web", "javascript", "html", "css"]}
->
+
+<Layout title={title} description={description} tags={tags.join(", ")}>
   <h1>Today I learned.</h1>
   <p>日々学んだことを公開するサイトです。</p>
   <ul>
     {
       allPosts.reverse().map((post) => (
         <li>
-          <time>{post.frontmatter.publishedAt}</time>: <a href={post.url}>{post.frontmatter.title}</a>
+          <time>{post.frontmatter.publishedAt}</time>:{" "}
+          <a href={post.url}>{post.frontmatter.title}</a>
         </li>
       ))
     }
