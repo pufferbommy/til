@@ -4,7 +4,7 @@ html {
   letter-spacing: 0.05em;
 }
 
-main {
+:where(header, footer, main) {
   max-width: 50ch;
   margin: auto;
 }
