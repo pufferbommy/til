@@ -1,0 +1,55 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-05-21"
+updatedDate: "2024-05-21"
+title: "URL.parseで文字列をパースする"
+author: ダーシノ
+description: "URL.parse()を使うと、URL.canParse()とnew URL()を一度に行うことができる。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+文字列がURLとして有効かどうかを判定するため`URL.parse()`がある。
+
+## Before #1: try-catch
+
+文字列をチェックするためだけなのに仰々しすぎる。
+```js
+try {
+  const url = new URL('invalid url')
+  console.log({ url })
+} catch {
+  ...
+}
+```
+
+## Before #2: URL.canParse()
+
+[URL.canParse()](https://developer.mozilla.org/en-US/docs/Web/API/URL/canParse_static)はBaselineに到達しているため、全主要ブラウザで利用可能。
+
+`URL.canParse()`が文字列を判定しtrue/falseを返してくれる。
+
+```js
+const invalidURL = 'invalid url'
+if (URL.canParse(invalidURL)) {
+  const url = new URL(invalidURL)
+  console.log({ url })
+}
+```
+
+## After: URL.parse()
+
+[URL.parse()](https://developer.mozilla.org/en-US/docs/Web/API/URL/parse_static)を使うと、`URL.canParse()`と`new URL()`を一度に行うことができる。
+
+※2024-07-21現在、Chrome126、Edge126、Firefox126、Safari TP(18)で利用可能。
+
+```js
+const url = URL.parse('invalid url')
+console.log({ url })
+
+if (url === null) { // 不正なURL }
+if (url instanceof URL) { // パース成功 }
+```
