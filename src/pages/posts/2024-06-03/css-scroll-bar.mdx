@@ -1,0 +1,39 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-06-03"
+updatedDate: "2024-06-03"
+title: "スクロールバー表示/非表示時のガタツキを防ぐ"
+author: ダーシノ
+description: "あらかじめスクロールバー分のスペースを確保することで、要素が増えスクロールバーが表示されてもガタつかないようにできる。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+あらかじめスクロールバー分のスペースを確保することで、要素が増えスクロールバーが表示されてもガタつかないようにできる。
+
+※2024-06-03時点ではChrome94、Edge94、Firefox97でのみ利用可能。Safariは未サポート。
+
+```css
+.container {
+  scrollbar-gutter: stable;
+}
+```
+
+```text
+// scrollbar-gutter: stable;
++---------+-+
+|         | |
+|         | |
++---------+-+
+           ↑ 右端のスクロールバーが表示される部分に余白ができる
+
+// scrollbar-gutter: stable both-edges;
++-+-------+-+
+| |       | |
+| |       | |
++-+-------+-+
+ ↑         ↑ 両サイドに余白ができる
+```
