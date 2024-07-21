@@ -13,10 +13,6 @@ html {
   margin: auto;
 }
 
-h1 {
-  text-wrap: balance;
-}
-
 p {
   word-break: auto-phrase;
 }

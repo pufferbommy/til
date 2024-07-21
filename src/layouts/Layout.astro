@@ -25,6 +25,9 @@ const { title, description, tags } =
   <body>
     <header>
       <a href="/til">≪ Today I learned.</a>
+      <a href="/til/rss" target="_blank" aria-label="RSSフィードを購読する">
+        RSS購読
+      </a>
     </header>
     <main>
       <slot />
@@ -41,3 +44,10 @@ const { title, description, tags } =
     </footer>
   </body>
 </html>
+
+<style>
+header {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

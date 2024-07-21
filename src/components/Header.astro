@@ -26,33 +26,33 @@ const { title, pubDate, updatedDate, tags } = Astro.props;
     <div>
       <dt>著者</dt>
       <dd>
-        <a href="https://x.com/bc_rikko" target="_blank"
-          >ダーシノ(@bc_rikko)<a> </a>
-        </a>
+        <a href="https://x.com/bc_rikko" target="_blank">
+          ダーシノ(@bc_rikko)
+        <a>
       </dd>
-      <h1>{title}</h1>
     </div>
-
-    <style>
-      .tags {
-        font-size: 0.8rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2em;
-
-        > div {
-          display: flex;
-          gap: 0.5em;
-        }
-
-        dt::after {
-          content: ":";
-        }
-
-        dd {
-          margin: 0;
-        }
-      }
-    </style>
   </dl>
+  <h1>{title}</h1>
 </hgroup>
+
+<style>
+.tags {
+  font-size: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+
+  > div {
+    display: flex;
+    gap: 0.5em;
+  }
+
+  dt::after {
+    content: ":";
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+</style>
