@@ -1,0 +1,27 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-06-14"
+updatedDate: "2024-06-14"
+title: "Clipboard APIでクリップボードにアクセスする"
+author: ダーシノ
+description: "Firefox127がClipboard APIのRead/Writeをサポートしたことで、全モダンブラウザで利用可能になった。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[Firefox127](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/127)が[Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API)のRead/Writeをサポートしたことで、全モダンブラウザで利用可能になった。
+
+
+```js
+// コピー
+const text = 'xxxx'
+await window.navigator.clipboard.writeText(text)
+
+// 貼り付け
+const paste = await window.navigator.clipboard.readText()
+```
+
+※ページにフォーカスが当たっていない場合、「DOMException: Failed to execute 'readText' on 'Clipboard': Document is not focused」というエラーになるため、Consoleからの実行はできない。
