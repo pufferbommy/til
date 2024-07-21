@@ -1,0 +1,66 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-06-04"
+updatedDate: "2024-06-04"
+title: "PlaywrightとAxeでE2Eテストにアクセシビリティチェックを組み込む"
+author: ダーシノ
+description: "ReactやVueなどでコンポーネントを分割しながら開発していると、文書全体の整合性チェックができない。そのため、E2Eテストに組み込むことでレンダリング後のHTMLを確認する。"
+tags: ["JavaScript", "HTML", "Accessibility"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+ReactやVueなどでコンポーネントを分割しながら開発していると、文書全体の整合性チェックができない。そのため、E2Eテストに組み込むことでレンダリング後のHTMLを確認する。
+
+## 準備、インストール
+
+```sh
+# playwright のセットアップ
+$ npm init playwright
+$ npm i -D @axe-core/playwrigh
+```
+
+## Playwrightの設定ファイル
+雛形が作られているのでカスタマイズする。
+
+```ts
+// playwright.config.ts  
+export default defineConfig({
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        ignoreHTTPSErrors: true,  // ← 自己署名証明書を使っている場合はtrue
+      },
+    },
+    ...
+  },
+  webServer: {
+    command: 'npm run dev',  // ← viteで開発用Webサーバを起動する
+    reuseExistingServer: !process.env.CI,
+  },
+})
+```
+
+## テスト
+
+```ts
+import { expect, test } from '@playwright/test'
+
+test('ログインページ', async ({ page }) => {
+  await page.goto('/')
+  await expect(page).toHaveTitle('ログイン')
+
+  // レンダリングされるまで待機
+  await expect(page.getByRole('heading', { name: 'ログイン', level: 1 })).toBeVisible()
+
+  // アクセシビリティチェック
+  const accessibilityScanResults = await new AxeBuilder({ page }).analyze()
+
+  // results#violationsにチェック結果が含まれているので必要に応じてconsoleに出力する
+  await expect(accessibilityScanResults.violations.length).toBe(0)
+})
+```
