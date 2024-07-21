@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string
+  description: string
+  tags: string
+}
+
+const props = Astro.props.frontmatter ?? Astro.props
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+
+<meta name="author" content="ダーシノ(B.C.Rikko)">
+<meta name="description" content={props.description}>
+<meta name="keywords" content={props.tags}>
+<meta name="generator" content="Astro">
+<meta name="theme-color" content="#fafafa">
+<meta name="color-scheme" content="only light">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content={`${props.title} | ダーシノ(B.C.Rikko)`}>
+<meta property="og:description" content={props.description}>
+<meta property="og:image" content="/til/bcrikko.png">
+<meta property="og:url" content={Astro.url}>
