@@ -10,7 +10,7 @@ html {
 
 :where(header, footer, main) {
   max-width: 40ic;
-  margin: auto;
+  margin-inline: auto;
 }
 
 p {
