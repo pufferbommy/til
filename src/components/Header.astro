@@ -1,56 +1,58 @@
 ---
 interface Props {
   title: string;
-  publishedAt: string;
-  updatedAt: string;
-  tags: string[]
+  pubDate: string;
+  updatedDate: string;
+  tags: string[];
 }
 
-const { title, publishedAt, updatedAt, tags } = Astro.props;
+const { title, pubDate, updatedDate, tags } = Astro.props;
 ---
 
 <hgroup>
   <dl class="tags">
     <div>
       <dt>公開日</dt>
-      <dd><time>{publishedAt}</time></dd>
+      <dd><time>{pubDate}</time></dd>
     </div>
     <div>
       <dt>更新日</dt>
-      <dd><time>{updatedAt}</time></dd>
+      <dd><time>{updatedDate}</time></dd>
     </div>
     <div>
       <dt>タグ</dt>
-      <dd>{tags.join(', ')}</dd>
+      <dd>{tags.join(", ")}</dd>
     </div>
     <div>
       <dt>著者</dt>
       <dd>
-        <a href="https://x.com/bc_rikko" target="_blank">ダーシノ(@bc_rikko)<a>
+        <a href="https://x.com/bc_rikko" target="_blank"
+          >ダーシノ(@bc_rikko)<a> </a>
+        </a>
       </dd>
+      <h1>{title}</h1>
     </div>
+
+    <style>
+      .tags {
+        font-size: 0.8rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2em;
+
+        > div {
+          display: flex;
+          gap: 0.5em;
+        }
+
+        dt::after {
+          content: ":";
+        }
+
+        dd {
+          margin: 0;
+        }
+      }
+    </style>
   </dl>
-  <h1>{title}</h1>
 </hgroup>
-
-<style>
-.tags {
-  font-size: 0.8rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2em;
-
-  > div {
-    display: flex;
-    gap: 0.5em;
-  }
-
-  dt::after {
-    content: ":";
-  }
-
-  dd {
-    margin: 0;
-  }
-}
-</style>

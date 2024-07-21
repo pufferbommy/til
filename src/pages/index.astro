@@ -14,7 +14,7 @@ const tags = ["frontend", "web", "javascript", "html", "css"];
     {
       allPosts.reverse().map((post) => (
         <li>
-          <time>{post.frontmatter.publishedAt}</time>:{" "}
+          <time>{post.frontmatter.pubDate}</time>:{" "}
           <a href={post.url}>{post.frontmatter.title}</a>
         </li>
       ))
