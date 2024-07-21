@@ -1,6 +1,7 @@
 ---
 layout: ../../../layouts/Layout.astro
-pubDate: "2024-07-01"
+publishedAt: "2024-07-01"
+updatedAt: "2024-07-11"
 title: "height:0→autoをトランジションする"
 author: ダーシノ
 description: "通常height:0→autoのトランジションはできないが、calc-size()が実装されたら使えるようになる"
@@ -8,7 +9,6 @@ tags: ["HTML", "CSS"]
 ---
 
 import Header from '../../../components/Header.astro'
-import './script'
 import './style.css'
 
 <Header {...frontmatter} />
@@ -53,7 +53,38 @@ document.getElementById('open').addEventListener('click', () => {
 
 ## サンプル
 
+※2024-07-01現在、Chrome Canaryでのみ実行可能
+
 <button id="open">Open</button>
 <section class="panel">
   <p>Content</p>
-</section>
+</section
+>
+
+<script>{`
+document.getElementById('open').addEventListener('click', () => {
+  document.querySelector('.panel').classList.toggle('expanded')
+})
+`}</script>
+
+----
+
+## `calc-size()`が使えるようになるまでの対応
+
+`max-height`を使うことで`calc-size(auto)`と同じような効果が得られる。ただし、若干hackyになるので注意。
+
+```css
+.expand {
+  transition: all 0.2s;
+  height: auto;
+  overflow: hidden;
+
+  &[aria-hidden="true"] {
+    max-height: 0;
+  }
+  &[aria-hidden="false"] {
+    max-height: 100vh;
+    visibility: hidden;
+  }
+}
+```

@@ -10,7 +10,7 @@ const title = "Today I learned.";
     {
       allPosts.reverse().map((post) => (
         <li>
-          <time>{post.frontmatter.pubDate}</time>: <a href={post.url}>{post.frontmatter.title}</a>
+          <time>{post.frontmatter.publishedAt}</time>: <a href={post.url}>{post.frontmatter.title}</a>
         </li>
       ))
     }

@@ -1,18 +1,23 @@
 ---
 interface Props {
   title: string;
-  pubDate: string;
+  publishedAt: string;
+  updatedAt: string;
   tags: string[]
 }
 
-const { title, pubDate, tags } = Astro.props;
+const { title, publishedAt, updatedAt, tags } = Astro.props;
 ---
 
 <hgroup>
   <dl class="tags">
     <div>
       <dt>公開日</dt>
-      <dd><time>{pubDate}</time></dd>
+      <dd><time>{publishedAt}</time></dd>
+    </div>
+    <div>
+      <dt>更新日</dt>
+      <dd><time>{updatedAt}</time></dd>
     </div>
     <div>
       <dt>タグ</dt>
