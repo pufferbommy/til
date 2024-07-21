@@ -1,0 +1,35 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-05-21"
+updatedDate: "2024-05-21"
+title: "トランジションさせる要素の初期状態を指定する@starting-style"
+author: ダーシノ
+description: "`@starting-style`を使うと、トランジション開始時のスタイルを定義できる。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[@starting-style](https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style)を使うと、トランジション開始時のスタイルを定義できる。
+
+`@starting-style`はトランジションのみで、CSSアニメーションはいままで通り`@keyframes` + animationを使う。
+
+- ※2024-07-21現在、Chrome117、Edge117、Safari17.5で利用可能。
+- FirefoxはExperimentalとして実装されており、flagを有効にすることで使える
+
+```css
+.target {
+  transition: background-color: 1.5s;
+  /* トランジション後のスタイル */
+  background-color: green;
+}
+
+@starting-style {
+  .target {
+    /* トランジション前のスタイル（初期表示時のスタイル） */
+    background-color: transparent;
+  }
+}
+```
