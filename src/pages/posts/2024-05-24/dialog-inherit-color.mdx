@@ -1,0 +1,52 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-05-24"
+updatedDate: "2024-05-24"
+title: "dialog要素はcolorを継承しない"
+author: ダーシノ
+description: "dialog要素はコンテキストが切り替わるので、単純にcolor: inheritをしてしまうと直前の要素に指定されたcolorを継承してしまうからやっちゃダメかも。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+> Q. 探しものはなんですか？
+
+A. dialog要素がcolorを継承しないという仕様を確認したい
+
+> Q.見つけにくいものですか？
+
+A. MDN の中も、Living Standard の中も、探したけれど見つからないのに
+
+
+## dialog要素はcolorを継承しない
+
+```html
+<style>
+  body { color: red; }
+</style>
+
+<dialog open>
+  <p>system-colorのcanvastextの色になる</p>
+</dialog>
+```
+
+dialog要素のcolorを継承させるためには以下のように`inherit`を使う。
+```css
+body { color: red; }
+dialog { color: inherit; }
+```
+※color を継承すると currentColor が変わってしまうので dialog の border-color も同様に red に書き換わるので注意
+
+## colorを継承する前にちょっと待ってほしい
+
+**dialog要素はコンテキストが切り替わる**ので、単純に`color: inherit`をしてしまうと直前の要素に指定された`color`を継承してしまうからやっちゃダメかも。
+
+```html
+<section class="ド派手なセクション" style="color: red;">
+  <!-- bodyのcolorを継承したいのに直前のredになってしまう -->
+  <dialog>...</dialog>
+</section>
+```
