@@ -1,0 +1,55 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-06-17"
+updatedDate: "2024-06-17"
+title: "ECMAScript State3のPromise.try()を使う"
+author: ダーシノ
+description: "関数には同期的な処理と非同期的な処理がある。関数利用者はいまから使う関数がPromiseを返すかどうか知りたくない。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+2024年6月に[Promise.try](https://github.com/tc39/proposal-promise-try)がStage3になった。
+
+関数には同期的な処理と非同期的な処理がある。関数利用者はいまから使う関数がPromiseを返すかどうか知りたくない。
+
+## Before
+
+```js
+function syncFn(): string {
+  return 'sync'
+}
+
+function asyncFn(): Promise<string> {
+  return new Promise(r => setTimeout(() => r('async'), 100))
+}
+
+syncFn().then(a => ...)  // ERROR: Property 'then' does not exist on type 'string'.
+asyncFn().then(a => ...)
+```
+
+## After
+
+関数がPromiseを返すかどうかに関係なく Promise.then が使える
+```js
+Promise.try(syncFn).then(a => ...)
+Promise.try(asyncFn).then(a => ...)
+```
+
+同期関数でもawaitが使えるが「'await' has no effect on the type of this expression.」と言われる。
+```js
+const syncStr = await syncFn()
+// INFO: 'await' has no effect on the type of this expression.
+
+const asyncStr = await asyncFn()
+```
+
+例外が発生したときに、`Promise.resolve()`ではcatchできないが、`Promise.try()`ではcatchできる。
+```js
+const mustThrow = () => throw new Error('oh');
+Promise.resolve(mustThrow()).catch(/* 呼ばれない */);
+Promise.try(mustThrow).catch(/* 呼ばれる */)
+```
