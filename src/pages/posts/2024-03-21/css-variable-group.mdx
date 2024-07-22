@@ -1,0 +1,43 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-03-21"
+updatedDate: "2024-03-21"
+title: "CSS Variable Groups"
+author: ダーシノ
+description: "Sassの.Block { &__Element: ... }のように&でCSSカスタムプロパティを拡張するCSS Variable Groupという提案がなされている。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+Sassの`.Block { &__Element: ... }`のように`&`でCSSカスタムプロパティを拡張する[CSS Variable Group](https://github.com/w3c/csswg-drafts/issues/9992)という提案がなされている。
+
+便利そうだけど、`&__Selector`と同じようにGrep検索でヒットしなくなるので、ご利用は計画的にって感じ。
+
+## Before
+
+```css
+:root {
+  --color-green-010: ...;
+  ...
+  --color-green-100: ...;
+}
+
+color: var(--color-green-100);
+```
+
+## After
+```css
+:root {
+  /* CSS Variable Groupで`--color-green`というprefixに対し、010〜100のsufixをつける */
+  --color-green: {
+    010: ...;
+    ...
+    100: ...;
+  }
+}
+
+color: var(--color-green-100);
+```
