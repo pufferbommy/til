@@ -1,0 +1,35 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-03-15"
+updatedDate: "2024-03-15"
+title: "JSON Canvas Format"
+author: ダーシノ
+description: "JSON Canvas Formatとは、ObsidianのCanvas用に作られたJSONフォーマット。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[JSON Canvas Format](https://jsoncanvas.org/)とは、[Obsidian](https://obsidian.md/)のCanvas用に作られたJSONフォーマット。
+
+以下は、図を表現するためのJSONフォーマット。
+```text
++---+       +---+
+| A |-----|>| B |
++---+       +---+
+```
+```json
+{
+  "nodes": [
+    { "id": "a", "x": 10, "y": 10, "width": 50, "height": 50 },
+    { "id": "b", "x": 130, "y": 10, "width": 50, "height": 50 }
+  ],
+  "edges": [
+    { "id": "edge-a-b", "fromNode": "a", "fromSide": "right", "fromEnd": "none", "toNode": "b", "toSide": "left", "toEnd": "arrow" }
+  ]
+}
+```
+
+複雑GUIを開発するときのヒントになりそう。
