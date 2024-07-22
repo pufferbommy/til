@@ -1,0 +1,49 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-02-15"
+updatedDate: "2024-02-15"
+title: "DocumentFragmentで余計な要素を作らない"
+author: ダーシノ
+description: "DocumentFragmentを使うことで余計なcontainer要素を抑制できる"
+tags: ["HTML", "JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[DocumentFragment](https://developer.mozilla.org/ja/docs/Web/API/DocumentFragment)を使うことで余計なcontainer要素を抑制できる。
+
+イメージ的にはJSXの`<></>`と同じ。
+
+## 普通に実装すると…
+```jsx
+const container = document.createElement('div')
+const title = document.createElement('h1')
+...
+container.appendChild(title)
+document.body.appendChild(container)
+
+// ↓↓↓
+
+<body>
+  <div> {/*← コレいらない！！！！ */}
+    <h1>div絶許マン</h1>
+  </div>
+</body>
+```
+
+## DocumentFragmentを使うと…
+```jsx
+const fragment = new DocumentFragment()
+const title = ...
+...
+fragment.appendChild(title)
+document.body.appendChild(fragment)
+
+// ↓↓↓
+
+<body>
+  <h1>div絶許マン</h1>
+</body>
+```
