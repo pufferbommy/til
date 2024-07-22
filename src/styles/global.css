@@ -48,3 +48,11 @@ blockquote {
 a {
   word-break: break-word;
 }
+
+table {
+  width: 100%;
+  overflow-x: auto;
+}
+tr:nth-child(2n) {
+  background-color: #eeeeee;
+}
