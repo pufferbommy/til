@@ -1,0 +1,59 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-07-19"
+updatedDate: "2024-07-20"
+title: "Node.js v22.5がリリースされた"
+author: ダーシノ
+description: "Node.js v22.5がリリースされた。"
+tags: ["Node.js", "JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[Node.js v22.5](https://nodejs.org/en/blog/release/v22.5.0)がリリースされた。
+
+以下、注目の機能。
+
+## ブラウザ互換のWebSocketでフラグが不要に
+
+Experimentalのフラグが不要になった。
+
+> A browser-compatible implementation of WebSocket.
+> https://nodejs.org/api/http.html#websocket
+
+## SQLite3が使えるようになった
+
+[node:sqlite](https://nodejs.org/api/sqlite.html)を公式が提供してくれるので、3rdパーティ製のクライアントが不要になった。
+
+```js
+const { DatabaseSync } = require('node:sqlite');
+const database = new DatabaseSync(':memory:');
+
+database.exec(`
+  CREATE TABLE data(
+    key INTEGER PRIMARY KEY,
+    value TEXT
+  ) STRICT
+`);
+```
+
+## 追記:2024-07-19
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet">
+  <p lang="en" dir="ltr">⚠️ We&#39;re encouraging all users to temporarily downgrade to Node.js v22.4.1 due to a bug in v22.5.0.<br /><br />Full details here: <a href="https://t.co/N0UFoLqoak">https://t.co/N0UFoLqoak</a>
+  </p>&mdash; Node.js (@nodejs) <a href="https://twitter.com/nodejs/status/1814112932650701195?ref_src=twsrc%5Etfw">July 19, 2024</a>
+</blockquote>
+
+`fs.closeSync()`の変更によりバグってアプリケーションが動かなくなる可能性が高いため、v22.4 にダウングレードを推奨するとのこと。
+
+## 追記:2024-07-20
+
+<blockquote class="twitter-tweet">
+  <p lang="en" dir="ltr">Node.js 22.5.1 is now released and reverts the commit that caused the regression in 22.5.0. <br /><br />Details: <a href="https://t.co/CqkVE0RzzW">https://t.co/CqkVE0RzzW</a> <a href="https://t.co/KEpFYE4g2O">https://t.co/KEpFYE4g2O</a>
+  </p>&mdash; Node.js (@nodejs) <a href="https://twitter.com/nodejs/status/1814323839708656060?ref_src=twsrc%5Etfw">July 19, 2024</a>
+</blockquote>
+
+バグが修正され、v22.5.1がリリースされた。
