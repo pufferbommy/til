@@ -23,4 +23,5 @@
     ".nojekyll": true,
     "tsconfig.json": true,
   },
+  "editor.wordWrap": "on",
 }
