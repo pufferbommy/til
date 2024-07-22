@@ -1,0 +1,57 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-03-07"
+updatedDate: "2024-03-07"
+title: "safeキーワードを使ってあふれたアイテムをなんとか伝える"
+author: ダーシノ
+description: "safeキーワードを使うとコンテナ要素からはみ出した場合に「文章の先頭だけ表示」ができるようになる。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+import './style.css'
+
+<Header {...frontmatter} />
+
+[Safari TP 190](https://webkit.org/blog/15127/release-notes-for-safari-technology-preview-190/)でflexboxのsafeキーワードが追加された。
+
+※2023-03-07現在、Chrome115、Edge115、Firefox63、Safari TPで対応
+
+safeキーワードがない場合、あふれた文章の真ん中だけが表示され、ユーザーに伝わらなくなる。たとえば「safeキ [ーワードが] 追加された」のように「ーワードが」と表示されても意味が伝わらない。
+
+そこで、safeキーワードを使うとコンテナ要素からはみ出した場合に「文章の先頭だけ表示」ができるようになる。
+
+
+```html
+<div class="container">
+  <div class="item">center</div>
+  <div class="item">safeキーワードをつけておくとコンテナから溢れたときにstartと同様の配置になる</div>
+</div>
+
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: safe center; /* safeキーワードをつける */
+}
+</style>
+```
+
+
+## サンプル
+
+### `safe`を使わない場合
+<div class="container">
+  <p>可視領域</p>
+  <div class="item">短い文章</div>
+  <div class="item">safeキーワードをつけておくとコンテナから溢れたときにstartと同様の配置になる</div>
+</div>
+
+
+### `safe`を使う場合
+<div class="safe-container">
+  <p>可視領域</p>
+  <div class="item">短い文章</div>
+  <div class="item">safeキーワードをつけておくとコンテナから溢れたときにstartと同様の配置になる</div>
+</div>
+
