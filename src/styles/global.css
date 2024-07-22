@@ -44,3 +44,7 @@ blockquote {
   border-left: 8px solid #CACACA;
   background-color: #eeeeee;
 }
+
+a {
+  word-break: break-word;
+}
