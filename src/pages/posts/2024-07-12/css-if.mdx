@@ -1,0 +1,38 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-07-12"
+updatedDate: "2024-07-12"
+title: "CSSでif()が使えるようになる"
+author: ダーシノ
+description: "Inline conditionals（if()）が CSS Values Module Level 5 の仕様に追加される。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[Inline conditionals（if()）](https://github.com/w3c/csswg-drafts/issues/10064)が CSS Values Module Level 5 の仕様に追加される。
+
+`@supports`や`style(--variable, val)`のような分岐をブロックにわけず書けるようになるので、スコープが狭くなり可読性が向上する。
+
+## Before
+
+```css
+.class {
+  prop: xxx;
+}
+@supports (...) {
+  .class {
+    prop: yyy;
+  }
+}
+```
+
+## After
+
+```css
+.class {
+  prop: if(supports(...), xxx, yyy);
+}
+```
