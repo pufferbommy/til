@@ -1,0 +1,53 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-03-04"
+updatedDate: "2024-03-04"
+title: "Vitest（jest）でuseFakeTimers()を使うとPromiseが動かなくなる "
+author: ダーシノ
+description: "useFakeTimersを使うと`Error: Test timed out in 5000ms.」となる。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+以下のコードを実行すると`Error: Test timed out in 5000ms.」となる。
+
+```js
+vi.useFakeTimers()
+
+await waitFor(() => {
+  ...
+})
+```
+
+## 解決策: `advanceTimers`を設定する
+
+```ts
+// xxx.spec.ts
+const user = userEvent.setup({
+  advanceTimers: vi.advanceTimersByTime  // userEventにtimerをセット
+})
+
+beforeEach(() => {
+  // ワークアラウンド!!
+  // https://github.com/testing-library/user-event/issues/1115
+  (globalThis as any).jest = {
+    advanceTimersByTime: vi.advanceTimersByTime.bind(vi)
+  }
+  vi.useFakeTimers()
+  vi.setSystemTime('2024-01-01T00:00:00')
+})
+afterEach(() => {
+  vi.useRealTimers()
+})
+
+test('xxxx', async () => {
+  await user.click(...)  // userEventの代わりに最初にsetupしたものを使う
+  
+  await waitFor(() => {
+    expect(...).toBe(...)
+  })
+})
+```
