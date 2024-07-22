@@ -1,0 +1,45 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-03-01"
+updatedDate: "2024-03-01"
+title: "::backdrop がスタイルを継承するようになっ"
+author: ダーシノ
+description: "useFakeTimersを使うと`Error: Test timed out in 5000ms.」となる。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+> `::backdrop`擬似要素はどの要素にも継承せず、どの要素からも継承しません。この擬似要素に適用するプロパティの制限はありません。
+> https://developer.mozilla.org/ja/docs/Web/CSS/::backdrop
+
+
+> The ::backdrop pseudo-element is a tree-abiding pseudo-element. **It accepts all properties. It inherits from its originating element.**
+> https://drafts.csswg.org/css-position-4/#backdrop
+
+## Before
+
+```css
+/* ::backdropが:rootを継承しないためセレクタに追加する必要がある */
+:root, ::backdrop {
+  --bg-color: ...;
+}
+::backdrop {
+  background-color: var(--bg-color);
+}
+```
+
+## After
+
+```css
+:root {
+  --bg-color: ...;
+}
+::backdrop {
+  background-color: var(--bg-color);
+}
+```
+
+※2024-03-01時点で、Chrome122、Firefox122ではサポート済み。Safari17.3は未サポート。
