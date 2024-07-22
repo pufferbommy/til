@@ -1,0 +1,65 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-02-16"
+updatedDate: "2024-02-16"
+title: "複数の状態を型で表現する方法"
+author: ダーシノ
+description: "typeによって複数の状態を表現する方法で、react-router-domの実装を参考にしてみる。"
+tags: ["TypeScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+typeによって複数の状態を表現する方法で、react-router-domの実装を参考にしてみる。
+
+## いままでやっていたこと
+
+```ts
+export type FormData = Loading | Loaded
+
+export type Loading = {
+  state: 'loading'
+  name: undefined
+}
+export type Loaded = {
+  state: 'loaded'
+  name: string
+}
+```
+
+- 各状態ごとにtypeを作っているので関連性がわかりづらい
+- exportするtypeが増える
+   - exportするモノは少なければ少ないほどいい
+
+
+## react-router-domの実装
+
+```ts
+export type NavigationStates = {
+    Idle: {
+        state: "idle"
+        location: undefined
+        formMethod: undefined
+        ...
+    }
+    Loading: {
+        state: "loading"
+        location: Location
+        formMethod: Submission["formMethod"] | undefined
+        ...
+    }
+    Submitting: {
+        state: "submitting"
+        location: Location
+        formMethod: Submission["formMethod"]
+        ...
+    }
+}
+export type Navigation = NavigationStates[keyof NavigationStates]
+```
+
+- [router.ts#L506-L539](https://github.com/remix-run/react-router/blob/c164837171ba2e4f81d635c00aa62b0ccdeffdd9/packages/router/router.ts#L506-L539)
+- Idle状態のtypeを参照するには`NavigationStates["Idle"]`とする
+- NavigationStatesというtypeにまとめられているので関連性がわかりやすい
