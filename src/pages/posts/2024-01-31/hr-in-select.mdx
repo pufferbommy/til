@@ -1,0 +1,51 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-01-31"
+updatedDate: "2024-01-31"
+title: "<select>に<hr>で区切り線を付ける"
+author: ダーシノ
+description: "いままでWebでは<select>内に区切り線を入れることができず、代替手段として<optgroup>が使われていたが、HTMLの仕様としてselect要素にhr要素を含められるようになった"
+tags: ["HTML"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+いままでWebでは`<select>`内に区切り線を入れることができず、代替手段として`<optgroup>`が使われていたが、HTMLの仕様としてselect要素にhr要素を含められるようになった。
+
+※2024-01-31現在、Firefox122がサポートしたことで全主要ブラウザで利用可能
+
+## Before
+
+```html
+<select>
+  <optgroup>
+    <option>Abount</option>
+    <option>Check for Updates...</option>
+  </optgroup>
+  <optgroup>
+    <option>Preferences...</option>
+  </optgroup>
+</select>
+```
+
+## After
+
+```html
+<select>
+  <option>Abount</option>
+  <option>Check for Updates...</option>
+  <hr>
+  <option>Preferences...</option>
+</select>
+```
+
+## サンプル
+
+<select>
+  <option>Abount</option>
+  <option>Check for Updates...</option>
+  <hr />
+  <option>Preferences...</option>
+</select>
