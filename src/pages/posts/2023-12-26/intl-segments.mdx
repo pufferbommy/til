@@ -1,0 +1,34 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-12-26"
+updatedDate: "2023-12-26"
+title: "ブラウザで分かち書きする"
+author: ダーシノ
+description: "Intl.Segmentsを使うことで、3rdパーティライブラリを使わなくても分かち書きできるようになった。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[Intl.Segments](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter/segment/Segments)を使うことで、3rdパーティライブラリを使わなくても分かち書きできるようになった。
+
+```js
+const jp = new Intl.Segmenter('jp', { granularity: 'word' })
+const seg = jp.segment('インターネットにできることは何だろう。')
+console.table( Array.from(seg) )
+```
+
+|(index)|segment|index|input|isWordLike|
+|---:|---|---:|---|---|
+|0|'インターネット'|0|'インターネットにできることは何だろう。'|true|
+|1|'に'|7|'インターネットにできることは何だろう。'|true|
+|2|'できる'|8|'インターネットにできることは何だろう。'|true|
+|3|'こと'|11|'インターネットにできることは何だろう。'|true|
+|4|'は'|13|'インターネットにできることは何だろう。'|true|
+|5|'何だ'|14|'インターネットにできることは何だろう。'|true|
+|6|'ろう'|16|'インターネットにできることは何だろう。'|true|
+|7|'。'|18|'インターネットにできることは何だろう。'|false|
+
+`Intl.Segments`のような機能があるおかげで`word-break: auto-phrase`のような便利機能が使えるようになっている。
