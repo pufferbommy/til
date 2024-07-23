@@ -1,0 +1,47 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-09-19"
+updatedDate: "2023-09-19"
+title: "<header>と<hgroup>の使い分け"
+author: ダーシノ
+description: "<header>と<hgroup>の使い分け"
+tags: ["HTML"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+## header
+- https://developer.mozilla.org/ja/docs/Web/HTML/Element/header
+- 導入部やナビゲーションのグループを表す
+- 区分コンテンツ（mainやsection、article、asideなど）に**含まれない限り**`role="banner"`のランドマークを表す
+
+
+## hgroup
+- https://developer.mozilla.org/ja/docs/Web/HTML/Element/hgroup
+- タイトルとその説明をグルーピングする
+- アクセシビリティ的には強い意味はない
+
+```html
+<body>
+  <!-- role="banner" -->
+  <header>
+    <hgroup>
+      <h1>Page Title</h1>
+      <p>Description</p>
+    </hgroup>
+  </header>
+  <section>
+    <article>
+      <!-- role="none" -->
+      <header>
+        <hgroup>
+          <h2>Title</h2>
+          <p>Description</p>
+        </hgroup>
+      </header>
+    </article>
+  </section>
+</body>
+```
