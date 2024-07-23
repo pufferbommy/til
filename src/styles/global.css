@@ -8,7 +8,7 @@ html {
   background-color: #fafafa;
 }
 
-:where(header, footer, main) {
+:where(header, footer, main, aside) {
   max-width: 40ic;
   margin-inline: auto;
 }
