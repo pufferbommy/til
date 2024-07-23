@@ -1,0 +1,41 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-09-25"
+updatedDate: "2023-09-25"
+title: "軽量分かち書き器 BudouX"
+author: ダーシノ
+description: "Googleが開発しているBudouXを使うと、日本語のテキストに分かち書きできる。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+Googleが開発している[BudouX](https://github.com/google/budoux)を使うと、日本語のテキストに分かち書きできる。
+
+```html
+<script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
+
+<budoux-ja>その後、BudouX により折り返し処理を適用したい文字列を budoux-ja カスタム要素に渡すと、自動でテキスト折り返しを整えるためのマークアップが Shadow Root に挿入されます。</budoux-ja>
+```
+↓
+```html
+#shadow-root
+<span style="word-break: keep-all; overflow-wrap: anywhere;">その後、<wbr>BudouX に<wbr>より<wbr>折り返し処理を<wbr>適用したい<wbr>文字列を<wbr> budoux-ja カスタム要素に<wbr>渡すと、<wbr>自動で<wbr>テキスト折り返しを<wbr>整える<wbr>ための<wbr>マークアップが<wbr> Shadow Root に<wbr>挿入されます。</span>
+```
+
+## `word-break: auto-phrase`
+
+> Chrome 119以降ではlang属性がjaで指定された要素について、**CSSで`word-break: auto-phrase`と指定された部分がBudouXによって分節区切りで折り返されるようになります。**
+> https://developers-jp.googleblog.com/2023/09/budoux-adobe.html
+
+```html
+<html lang="ja">
+  <p style="word-break: auto-phrase;>...</p>
+</html>
+```
+
+## デモ
+
+<p style="word-break: auto-phrase;">その後、BudouX により折り返し処理を適用したい文字列を budoux-ja カスタム要素に渡すと、自動でテキスト折り返しを整えるためのマークアップが Shadow Root に挿入されます。</p>
