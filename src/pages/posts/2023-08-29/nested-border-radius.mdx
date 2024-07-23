@@ -1,0 +1,63 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-08-29"
+updatedDate: "2023-08-29"
+title: "入れ子要素のborder-radiusをいい感じにする"
+author: ダーシノ
+description: "要素を入れ子にする場合、親と子で同じ値のborder-radiusを設定すると視覚的に微妙になってしまう。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+import './style.css'
+
+<Header {...frontmatter} />
+
+要素を入れ子にする場合、親と子で同じ値の`border-radius`を設定すると視覚的に微妙になってしまう。親の`border-radius`から`padding`を引いた値を子の`border-radius`に設定することで、親子の`border-radius`が同じに見えるようになる。
+
+```html
+<div class="parent">
+  <div class="child">
+  </div>
+</div>
+```
+
+```css
+.parent {
+  --padding: 8px;
+  --radius: 24px;
+  
+  border-radius: var(--radius);
+  padding: var(--padding);
+  --nested-radius: calc(var(--radius) - var(--padding));
+}
+.child {
+  border-radius: var(--nested-radius);
+}
+
+.parent {
+  border: solid 4px blue;
+}
+.child {
+  border: solid 4px red;
+}
+```
+
+
+## デモ
+
+### 未調整
+
+<div class="parent ng">
+  <div class="child ng">
+    Content
+  </div>
+</div>
+
+### 調整済み
+
+<div class="parent ok">
+  <div class="child ok">
+    Content
+  </div>
+</div>
