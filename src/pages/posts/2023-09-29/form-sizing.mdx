@@ -1,0 +1,35 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-09-29"
+updatedDate: "2023-09-29"
+title: "テキストエリアのheightを自動調整する"
+author: ダーシノ
+description: "field-sizingを使うと、入力内容によって<textarea>のheightが自動調整できる。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[field-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing)を使うと、入力内容によって`<textarea>`のheightが自動調整できる。
+
+
+## `<textarea>`の問題点
+
+- JSを使わないと自動で高さ調整ができない
+- contenteditable属性もあるが闇魔術なので使わないほうがいい
+- rows属性も結局は固定高なのでテキストエリア内にスクロールが発生する
+
+
+## field-sizingでheightを自動調整する
+
+```css
+textarea {
+  field-sizing: content;
+}
+```
+
+## デモ
+
+<textarea style="field-sizing: content; width: 100%;">入力内容が増えるとテキストエリアが拡張される</textarea>
