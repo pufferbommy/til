@@ -1,0 +1,38 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-12-11"
+updatedDate: "2023-12-11"
+title: "JS Formatterグランプリ"
+author: ダーシノ
+description: "ESLint v8.53からスタイル関連のルールが非推奨になり、別途Formatterが必要になるのでいろいろ調べてみた。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+ESLint v8.53からスタイル関連のルールが非推奨になり、別途Formatterが必要になるのでいろいろ調べてみた。
+
+個人的にはESLintやVSCodeとの相性を考えると移行の影響度が低そうな`eslint-stylistic`が良い気がする。
+
+## eslint-stylistic
+- https://eslint.style/
+- ESLintからスタイル関連を抜き出してplugins化したもの
+- ESLintに統合できる
+- 遅い
+
+## Prettier
+- https://prettier.io/
+- 一世風靡したが最近使っている人が少なくなった気がする
+- 最近の動向は全然わからない
+
+## dprint
+- https://dprint.dev/
+- Rust製で高速が売り
+- 使ってる人見たことない
+
+## Biome
+- https://biomejs.dev/ja/
+- Rust製のLinter+Formatter
+- 時雨堂がスポンサーになってることしか知らない
