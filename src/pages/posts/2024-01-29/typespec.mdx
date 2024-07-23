@@ -1,0 +1,43 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-01-29"
+updatedDate: "2024-01-29"
+title: "TypeSpecがDSLを選択した理由"
+author: ダーシノ
+description: "TypeSpecはAPI定義言語で、OpenAPIのスキーマ定義やクライアント、ドキュメントなどを生成できる。"
+tags: ["TypeScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[TypeSpec](https://typespec.io/)はAPI定義言語で、OpenAPIのスキーマ定義やクライアント、ドキュメントなどを生成できる。
+
+```typespec
+import "@typespec/http";
+
+using TypeSpec.Http;
+
+model Store {
+  name: string;
+  address: Address;
+}
+
+model Address {
+  street: string;
+  city: string;
+}
+
+@route("/stores")
+interface Stores {
+  list(@query filter: string): Store[];
+  read(@path id: Store): Store;
+}
+```
+
+TypeSpecのサンプルコードを見た限りでは、TypeScriptのDecoratorを使えばいけるんじゃ？わざわざDSLにした理由は？と気になってTwitter（現X）を検索したところ、開発者がコメントしていた。
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Early iterations of TypeSpec were in fact a TypeScript-type-based DSL! From what I remember, it works great for describing JSON data shapes, but not so great for describing validations and non-JSON schemas, and didn&#39;t work very well at all for describing HTTP-level semantics.</p>&mdash; Brian Terlson (@bterlson) <a href="https://twitter.com/bterlson/status/1750089774734672022?ref_src=twsrc%5Etfw">January 24, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+[データバリデーション](https://typespec.io/data-validation)などを表現するには、TypeScriptではうまく表現できなかったらしい。
