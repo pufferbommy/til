@@ -1,0 +1,47 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-08-01"
+updatedDate: "2023-08-01"
+title: ".slice().splice()と.with()/.toSpliced()の関係"
+author: ダーシノ
+description: "Array#with()とArray#toSpliced()が追加された"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[Array#with()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/with)と[Array#toSpliced()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced)が追加された。
+
+`Array.slice().splice(index, 1, newItem)` = `Array.with(index, newItem)` = `Array.toSpliced(index, 1, newItem)`という関係だ。
+
+## After
+
+```js
+const items = [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
+
+// 2つ目の要素のオブジェクトを書き換える
+items.splice(1, 1, { name: 'new' })
+console.log(items)  // [{ name: 'a' }, { name: 'new' }, { name: 'c' }]
+
+// 元の配列を書き換えない場合
+const newItems = items.slice().splice(1, 1, { name: 'new' })
+```
+
+
+## Before
+
+```js
+const newItems = items.with(1, { name: 'new' })
+
+console.log(items)     // [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
+console.log(newItems)  // [{ name: 'a' }, { name: 'new' }, { name: 'c' }]
+```
+または
+```js
+const newItems = items.toSpliced(1, 1, { name: 'new' })
+
+console.log(items)     // [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
+console.log(newItems)  // [{ name: 'a' }, { name: 'new' }, { name: 'c' }]
+```
