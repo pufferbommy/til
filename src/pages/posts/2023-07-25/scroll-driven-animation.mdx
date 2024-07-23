@@ -1,0 +1,58 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-07-25"
+updatedDate: "2023-07-25"
+title: "スクロールに連動しアニメーションする"
+author: ダーシノ
+description: "Chrome115/Edge115でCSSだけでスクロール駆動アニメーションができるようになった。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+import './style.css'
+
+<Header {...frontmatter} />
+
+Chrome115/Edge115でCSSだけで[スクロール駆動アニメーション](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline)ができるようになった。
+
+※2023-07-25時点で、Firefox、Safariは未対応。
+
+```html
+<main>
+  スクロールが発生するくらい長いコンテンツ
+</main>
+
+<span class="point"></span>
+```
+```css
+@keyframes move {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100vw - 100px);
+  }
+}
+
+.point {
+  ...
+  animation: move linear;
+  /* scroll(scroller, axis)を指定することで
+   * animationプロパティに指定したmove keyframesのアニメーションが実行される
+   */
+  animation-timeline: scroll(root block);
+}
+```
+
+## デモ
+
+スクロールすることで、ページ下部にある赤いバーが連動してアニメーションすることが確認できる。
+
+※2023-07-25時点ではChrome115、Edge115でのみ確認できる
+
+<span class="point"></span>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
