@@ -1,0 +1,69 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-10-19"
+updatedDate: "2023-10-19"
+title: "君たちは著作権情報をどうマークアップするか"
+author: ダーシノ
+description: "<small>はHTMLの要素で、スタイルの表現とは独立して、著作権表示や法的表記のような、注釈や小さく表示される文を表します。"
+tags: ["HTML"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+## 原理主義
+
+```html
+<footer>
+  <p><small>©SAKURA internet inc.</small></p>
+</footer>
+```
+
+> `<small>`はHTMLの要素で、スタイルの表現とは独立して、著作権表示や法的表記のような、注釈や小さく表示される文を表します。
+> https://developer.mozilla.org/ja/docs/Web/HTML/Element/small
+
+
+## 実際どうか
+
+```html
+<footer>
+  <p>©SAKURA internet inc.</p>
+</footer>
+```
+
+MDNもW3Cも`<small>`を使っていない。
+理由はおそらく`<footer>`自体に著作権情報を含めるという意味があるため。
+
+> フッターには通常、そのセクションの著者に関する情報、関連文書へのリンク、著作権情報等を含めます。
+> https://developer.mozilla.org/ja/docs/Web/HTML/Element/footer
+
+
+## では small はいつ使うのか
+
+```html
+<p>
+  <small>この名前はSAKURA internet inc.の登録商標です。</small>
+</p>
+```
+のようにfooterとは別の場所で法的表記をするときに使う（のかもしれない）
+
+## 参考
+
+### `<small>`を使っていない信頼度が高めなサイト
+
+- W3C: https://www.w3.org/
+- MDN: https://developer.mozilla.org/ja/
+- UK Design System: https://design-system.service.gov.uk/
+- 総務省統計局: https://www.stat.go.jp/
+- アクセシビリティおじさん: https://www.scottohara.me/
+
+
+### `<small>`を使っているサイト
+
+- 弊社: https://www.sakura.ad.jp/
+- CA: https://www.cyberagent.co.jp/
+- PRTimes: https://prtimes.jp/
+- Findy: https://findy-code.io/engineer-lab/event-a11y-test
+  - メインページはsmall使っていない
+- freee: https://www.freee.co.jp/
