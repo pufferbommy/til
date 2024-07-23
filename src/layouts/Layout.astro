@@ -1,6 +1,8 @@
 ---
 import Meta from "../components/Meta.astro";
 import GoogleFont from "../components/GoogleFont.astro";
+import Ads from "../components/Ads.astro";
+
 import "../styles/global.css";
 interface Props {
   title: string;
@@ -16,6 +18,10 @@ const { title, description, tags } =
 <html lang="ja">
   <head>
     <link rel="icon" type="image/vnd.microsoft.icon" href="/til/favicon.ico" />
+    <script
+      async
+      custom-element="amp-ad"
+      src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
     <Meta title={title} description={description} tags={tags} />
     <GoogleFont />
@@ -29,9 +35,13 @@ const { title, description, tags } =
         RSS購読
       </a>
     </header>
+    
     <main>
       <slot />
     </main>
+
+    <Ads />
+    
     <footer>
       <p>
         <small>
@@ -46,11 +56,11 @@ const { title, description, tags } =
 </html>
 
 <style>
-header {
-  display: flex;
-  justify-content: space-between;
-}
-footer {
-  text-align: center;
-}
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+  footer {
+    text-align: center;
+  }
 </style>
