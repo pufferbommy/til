@@ -1,0 +1,49 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-12-12"
+updatedDate: "2023-12-12"
+title: "<details name='xxx'>でJavaScriptなしでアコーディオンメニューが実装可能に"
+author: ダーシノ
+description: "{ページの概要}"
+tags: ["HTML"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[details](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)要素にname属性をつけるとグループ化することができるようになった。
+
+※2024-07-23時点、Firefox130で対応されれば全モダンブラウザで利用可能になる。
+
+```html
+<details name="accordion" open>
+  <summary>Item 1</summary>
+  <p>aaaaaaaaaaaaa</p> 
+</details>
+<details name="accordion">
+  <summary>Item 2</summary>
+  <p>bbbbbbbbbbbbb</p>
+</details>
+<details name="accordion">
+  <summary>Item 3</summary>
+  <p>ccccccccccccc</p> 
+</details>
+```
+
+## サンプル
+
+※Firefox130未満では動作しません
+
+<details name="accordion" open>
+  <summary>Item 1</summary>
+  <p>aaaaaaaaaaaaa</p> 
+</details>
+<details name="accordion">
+  <summary>Item 2</summary>
+  <p>bbbbbbbbbbbbb</p>
+</details>
+<details name="accordion">
+  <summary>Item 3</summary>
+  <p>ccccccccccccc</p> 
+</details>
