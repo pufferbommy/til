@@ -1,0 +1,23 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-11-13"
+updatedDate: "2023-11-13"
+title: "CSSでpow()/sqrt()/hypot()/log()が利用可能に"
+author: ダーシノ
+description: "CSSでpow()、sqrt()、log()、hypot()が使えるようになった。既存のsin()やcos()などと組み合わせることで、より柔軟なアニメーションが書きやすくなる。"
+tags: ["CSS"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+Chrome120 betaにCSSで使える[指数関数](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Functions#%E6%8C%87%E6%95%B0%E9%96%A2%E6%95%B0)が追加された。
+
+CSSで`pow()`、`sqrt()`、`log()`、`hypot()`が使えるようになった。既存の`sin()`や`cos()`などと組み合わせることで、より柔軟なアニメーションが書きやすくなる。
+
+```css
+.item {
+  width: calc(1px * pow(2, 8));
+}
+
