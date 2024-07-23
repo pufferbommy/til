@@ -1,0 +1,19 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-02-02"
+updatedDate: "2024-02-02"
+title: "ESLintを爆速にする"
+author: ダーシノ
+description: "ESLint実行時に—cacheフラグをつけることで、.eslintcacheが作成され変更があったファイルのみチェックするようになるので実行時間が短くなる。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+ESLint実行時に[--cache](https://eslint.org/docs/latest/use/command-line-interface#caching)フラグをつけることで、`.eslintcache`が作成され変更があったファイルのみチェックするようになるので実行時間が短くなる。
+
+```sh
+$ npm run eslint -- --cache
+```
