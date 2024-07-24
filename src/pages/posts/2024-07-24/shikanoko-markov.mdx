@@ -1,0 +1,119 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2024-07-24"
+updatedDate: "2024-07-24"
+title: "「しかのこのこのここしたんたん」をマルコフ連鎖でつくる"
+author: ダーシノ
+description: "font-size-adjustに係数を指定することで、フォントのサイズ感を調整できる。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Xkq13ZthmA0?si=taWRJ_0SEZKBwYVL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+「しかのこのこのここしたんたん」をマルコフ連鎖でつくる動画をみたので、実装してみる。
+
+```typescript
+const target = "しかのこのこのここしたんたん" as const
+cosnt loopLimit = 1_000
+
+type Word = {
+  [word: string]: {
+    // key: 次にくる語、value: 確率（重み）
+    [next: string]: number
+  }
+}
+
+// 重み付けリスト
+const shika: Readonly<Word> = {
+    "し": { "か": 0.5, "た": 0.5, },
+    "か": { "の": 1 },
+    "の": { "こ": 1 },
+    "こ": { "の": 0.5, "こ": 0.25, "し": 0.25 },
+    "た": { "ん": 1 },
+    "ん": { "た": 0.5, " ": 0.5 },
+    " ": { " ": 0.5, "し": 0.5 }
+} as const
+
+// wordにmatcherが含まれるか判定する
+const isMatch = (word: string, matcher: string) => {
+  return word.slice(matcher.length * -1) === matcher
+}
+
+// 次に現れる語を取得する
+const pick = (entries: [string, number][]) => {
+  const rnd = Math.random()
+  let sum = 0.0;
+  for (const e of entries) {
+    sum += e[1]
+    if (rnd < sum) {
+      return e[0]
+    }
+  }
+}
+
+let result = ""
+let current = "し"
+
+while (isMatch(result, target) === false && result.length < loopLimit) {
+  result += current
+  const entries = Object.entries(shika[current])
+  current = pick(entries)
+}
+
+console.log(result)
+```
+
+## デモ
+
+<button type="button" id="run">連鎖開始</button>
+<output id="output">output</output>
+
+<script>{`
+const target = "しかのこのこのここしたんたん";
+const loopLimit = 1000;
+const shika = {
+  "し": { "か": 0.5, "た": 0.5, },
+  "か": { "の": 1 },
+  "の": { "こ": 1 },
+  "こ": { "の": 0.5, "こ": 0.25, "し": 0.25 },
+  "た": { "ん": 1 },
+  "ん": { "た": 0.5, " ": 0.5 },
+  " ": { " ": 0.5, "し": 0.5 }
+};
+const isMatch = (word, matcher) => {
+  return word.slice(matcher.length * -1) === matcher;
+};
+const pick = (entries) => {
+  const rnd = Math.random();
+  let sum = 0.0;
+  for (const e of entries) {
+    sum += e[1];
+    if (rnd < sum) {
+      return e[0];
+    }
+  }
+};
+
+const run = () => {
+  let result = "";
+  let current = "し";
+  while (isMatch(result, target) === false && result.length < loopLimit) {
+    result += current;
+    const entries = Object.entries(shika[current]);
+    current = pick(entries);
+    debugger
+  }
+
+  document.querySelector('#output').textContent = (isMatch(result, target) ? "Success:" : "Number of iterations exceeded:") + result
+}
+
+document.getElementById('run').addEventListener('click', run)
+`}</script>
+
+## 参考
+
+- [【JavaScript】重み付けされた値をランダムで取得する \| Black Everyday Company](https://kuroeveryday.blogspot.com/2016/06/probabilistic-choice.html)
