@@ -1,0 +1,39 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-06-19"
+updatedDate: "2023-06-19"
+title: "Cookie Store API"
+author: ダーシノ
+description: "{ページの概要}"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[Cookie Store API](https://developer.mozilla.org/ja/docs/Web/API/CookieStore)がChrome、Edge、Safariで使えるようになった。
+
+ただ機能的な課題が残っているため、Firefoxが対応完了するのは当分先になりそうだ。
+
+## Before
+
+```js
+document.cookie = 'lang=ja'
+
+const cookies = new Map(
+  document.cookie.split(';').map(a => a.split('='))
+)
+// { lang => ja, id => 123 }
+
+console.log(cookies.get('lang')) // ja
+```
+
+## After
+
+```js
+await CookieStore.set('lang', 'ja')
+
+const lang = await CookieStore.get('lang')
+console.log(lang.value) // ja
+```
