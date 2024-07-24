@@ -4,7 +4,7 @@ pubDate: "2024-07-24"
 updatedDate: "2024-07-24"
 title: "「しかのこのこのここしたんたん」をマルコフ連鎖でつくる"
 author: ダーシノ
-description: "font-size-adjustに係数を指定することで、フォントのサイズ感を調整できる。"
+description: "「しかのこのこのここしたんたん」をマルコフ連鎖でつくる動画をみたので実装してみる。"
 tags: ["JavaScript"]
 ---
 
@@ -47,10 +47,10 @@ const isMatch = (word: string, matcher: string) => {
 const pick = (entries: [string, number][]) => {
   const rnd = Math.random()
   let sum = 0.0;
-  for (const e of entries) {
-    sum += e[1]
+  for (const [word, weight] of entries) {
+    sum += weight
     if (rnd < sum) {
-      return e[0]
+      return word
     }
   }
 }
@@ -90,10 +90,10 @@ const isMatch = (word, matcher) => {
 const pick = (entries) => {
   const rnd = Math.random();
   let sum = 0.0;
-  for (const e of entries) {
-    sum += e[1];
+  for (const [word, weight] of entries) {
+    sum += weight;
     if (rnd < sum) {
-      return e[0];
+      return word;
     }
   }
 };
