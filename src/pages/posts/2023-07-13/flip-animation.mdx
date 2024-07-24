@@ -1,0 +1,36 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2023-07-13"
+updatedDate: "2023-07-13"
+title: "アニメーションの実装テクニック"
+author: ダーシノ
+description: "FLIPテクニックと呼ばれるもので、First、Last、Invert、Playの4つのステップでアニメーションを実装する方法だ。"
+tags: ["JavaScript"]
+---
+
+import Header from '../../../components/Header.astro'
+
+<Header {...frontmatter} />
+
+[@ktsn](https://katashin.info/)さんが[アニメーションを実装するときのコツ](https://katashin.info/posts/flip-animation/)を公開されていた。
+
+FLIPテクニックと呼ばれるもので、First、Last、Invert、Playの4つのステップでアニメーションを実装する方法だ。
+
+```js
+const items = ...
+
+// First: 現在の座標を取得
+const firstRects = first(items)
+
+// 要素が追加されたことで要素が動く
+prependItem(items, newItem)
+
+// Last: 移動後の座標を取得する
+const lastRects = last(items)
+
+// Invert: lastRects - firstRects で移動距離を求め、要素をfirstRectsの場所まで巻き戻す
+invert(items, firstRects, lastRects)
+
+// Play: Invertで巻き戻るのを待ったあとに、firstRectsからlastRectsに移動する
+play(items)
+```
