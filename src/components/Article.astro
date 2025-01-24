@@ -3,11 +3,10 @@ interface Props {
   url: string;
   title: string;
   pubDate: string;
-  updatedDate: string;
   tags: string[];
 }
 
-const { url, title, pubDate, updatedDate, tags } = Astro.props;
+const { url, title, pubDate, tags } = Astro.props;
 ---
 
 <article class="article">
@@ -16,24 +15,18 @@ const { url, title, pubDate, updatedDate, tags } = Astro.props;
   </h2>
   <dl class="info">
     <div>
-      <dt>公開日</dt>
+      <dt>Published</dt>
       <dd><time>{pubDate}</time></dd>
     </div>
     <div>
-      <dt>タグ</dt>
+      <dt>Tags</dt>
       <dd>
-        {
-          tags.map((tag, i) =>
-            i < tags.length - 1 ? (
-              <>
-                <a href={`/til/tags/${tag}`}>{tag}</a>
-                <span>, </span>
-              </>
-            ) : (
-              <a href={`/til/tags/${tag}`}>{tag}</a>
-            ),
-          )
-        }
+        {tags.map((tag, i) => (
+          <>
+            <a href={`/til/tags/${tag}`}>{tag}</a>
+            {i < tags.length - 1 && " , "}
+          </>
+        ))}
       </dd>
     </div>
   </dl>

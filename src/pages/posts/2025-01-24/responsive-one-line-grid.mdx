@@ -1,0 +1,28 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2025-01-24"
+updatedDate: "2025-01-24"
+title: "Responsive One-Line Grid"
+author: ダーシノ
+description: "Learn how to create a responsive one-line grid using CSS."
+tags: ["CSS", "Web Development"]
+---
+
+import Header from '../../../components/Header.astro'
+import Preview from './preview.astro'
+
+<Header {...frontmatter} />
+
+Here's the CSS code to create a flexible and responsive grid layout. It works well every screen size.
+
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  gap: 1rem;
+}
+```
+
+## Preview
+<Preview />

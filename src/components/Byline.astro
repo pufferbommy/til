@@ -11,17 +11,17 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 const byline = {
   "@context": "https://schema.org",
   "@type": "Article",
-  name: "Today I learned. | @bc_rikko",
-  url: "https://bcrikko.github.io/til/",
-  alternateName: "@bc_rikko",
+  name: "Today I learned. | pufferbommy",
+  url: "https://pufferbommy.github.io/til/",
+  alternateName: "pufferbommy",
   headline: title,
   description: description,
   datePublished: new Date(pubDate).toISOString(),
   dateModified: new Date(updatedDate).toISOString(),
   author: {
     "@type": "Person",
-    name: "ダーシノ(@bc_rikko)",
-    url: "https://x.com/bc_rikko",
+    name: "pufferbommy",
+    url: "https://x.com/pufferbommy",
   },
 };
 ---

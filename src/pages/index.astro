@@ -8,7 +8,7 @@ const allPosts: MDXInstance<MyPost>[] = Object.values(
   }),
 );
 const title = "Today I learned.";
-const description = "日々学んだことを公開するサイトです。";
+const description = "Sharing what I learned today";
 const tags = ["frontend", "web", "javascript", "html", "css"];
 ---
 
@@ -20,7 +20,7 @@ const tags = ["frontend", "web", "javascript", "html", "css"];
   tags={tags.join(", ")}
 >
   <h1>Today I learned.</h1>
-  <p>日々学んだことを公開するサイトです。</p>
+  <p>Sharing what I learned today</p>
   <ul>
     {
       allPosts
@@ -29,7 +29,7 @@ const tags = ["frontend", "web", "javascript", "html", "css"];
             new Date(b.frontmatter.pubDate).getTime() -
             new Date(a.frontmatter.pubDate).getTime(),
         )
-        .slice(0, 7)
+        .slice(0, 5)
         .map((post) => (
           <li>
             <Article
@@ -45,7 +45,9 @@ const tags = ["frontend", "web", "javascript", "html", "css"];
   </ul>
 
   <nav class="more">
-    <a href="/til/1">もっと読む</a>
+    <a href="/til/1">
+      Read more
+    </a>
   </nav>
 </Layout>
 
