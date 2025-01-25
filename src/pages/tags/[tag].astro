@@ -53,8 +53,7 @@ const tags = [tag];
   <h1>Today I learned.</h1>
   <p>Displaying articles with the [{tag}] tag.</p>
   <ul>
-    {
-      posts.map((post) => (
+    {posts.map((post) => (
         <li>
           <Article
             url={post.url}
@@ -63,7 +62,6 @@ const tags = [tag];
             tags={post.frontmatter.tags}
           />
         </li>
-      ))
-    }
+      ))}
   </ul>
 </Layout>

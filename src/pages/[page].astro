@@ -37,7 +37,6 @@ const { page } = Astro.props as { page: Page };
   tags={tags.join(", ")}
 >
   <h1>Today I learned.</h1>
-  <p>Sharing what I learned today</p>
   <ul>
     {
       page.data.map((post) => (
@@ -53,13 +52,13 @@ const { page } = Astro.props as { page: Page };
     }
   </ul>
 
-  <nav class="pagination" aria-label="ページネーション">
+  <nav class="pagination">
     <ul>
       {
         page.url.prev && (
           <li>
-            <a href={page.url.prev} aria-label="前のページに移動する">
-              ≪ 前へ
+            <a href={page.url.prev}>
+              ≪ Previous
             </a>
           </li>
         )
@@ -67,8 +66,8 @@ const { page } = Astro.props as { page: Page };
       {
         page.url.next && (
           <li>
-            <a href={page.url.next} aria-label="次のページに移動する">
-              次へ ≫
+            <a href={page.url.next}>
+              Next ≫
             </a>
           </li>
         )

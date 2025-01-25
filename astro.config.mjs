@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bcrikko.github.io',
+  site: 'https://pufferbommy.github.io',
   base: '/til',
   integrations: [
     mdx(),

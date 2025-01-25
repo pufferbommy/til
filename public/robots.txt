@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bcrikko.github.io/til/sitemap-index.xml
+Sitemap: https://pufferbommy.github.io/til/sitemap-index.xml
