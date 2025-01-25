@@ -2,8 +2,8 @@
 interface Props {
   title: string;
   description: string;
-  pubDate: string;
-  updatedDate: string;
+  pubDate?: string;
+  updatedDate?: string;
 }
 
 const { title, description, pubDate, updatedDate } = Astro.props;
@@ -16,8 +16,8 @@ const byline = {
   alternateName: "pufferbommy",
   headline: title,
   description: description,
-  datePublished: new Date(pubDate).toISOString(),
-  dateModified: new Date(updatedDate).toISOString(),
+  datePublished: pubDate ? new Date(pubDate).toISOString() : undefined,
+  dateModified: updatedDate ? new Date(updatedDate).toISOString() : undefined,
   author: {
     "@type": "Person",
     name: "pufferbommy",

@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import Article from "../../components/Article.astro";
 
 export async function getStaticPaths(): Promise<GetStaticPathsItem[]> {
-  const allPosts: MDXInstance<MyPost>[] = Object.values(
+  const allPosts: MDXInstance<PostFrontmatter>[] = Object.values(
     import.meta.glob(["../posts/**/*.{md,mdx}", "!../posts/**/_*.{md,mdx}"], {
       eager: true,
     }),
@@ -38,20 +38,16 @@ export async function getStaticPaths(): Promise<GetStaticPathsItem[]> {
 const { tag } = Astro.params as { tag: string };
 const { posts } = Astro.props as { posts: any[] };
 
-const title = `Articles tagged with "${tag}" | Today I learned.`;
+const title = `Today I learned. (${tag})`;
 const description = "Sharing what I learned today";
-const tags = [tag];
 ---
 
 <Layout
   title={title}
   description={description}
-  pubDate="2024-07-21"
-  updatedDate="2024-07-21"
-  tags={tags.join(", ")}
+  tags={tag}
 >
-  <h1>Today I learned.</h1>
-  <p>Displaying articles with the [{tag}] tag.</p>
+  <h1>Today I learned. ({tag})</h1>
   <ul>
     {posts.map((post) => (
         <li>

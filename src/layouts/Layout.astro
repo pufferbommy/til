@@ -1,4 +1,5 @@
 ---
+import Header from '../components/Header.astro'
 import Meta from "../components/Meta.astro";
 import GoogleFont from "../components/GoogleFont.astro";
 import SNS from "../components/SNS.astro";
@@ -11,8 +12,8 @@ interface Props {
   title: string;
   description: string;
   tags: string;
-  pubDate: string;
-  updatedDate: string;
+  pubDate?: string;
+  updatedDate?: string;
 }
 
 const { title, description, tags, pubDate, updatedDate } =
@@ -38,22 +39,10 @@ const { title, description, tags, pubDate, updatedDate } =
     <Discover rss="/til/rss" />
   </head>
   <body>
-    <header>
-      <a href="/til">≪ Today I learned.</a>
-      <a href="/til/rss" target="_blank">
-        RSS
-      </a>
-    </header>
+    <Header />
     <main>
       <slot />
     </main>
     <Footer />
   </body>
 </html>
-
-<style>
-  header {
-    display: flex;
-    justify-content: space-between;
-  }
-</style>

@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Article from "../components/Article.astro";
 import type { MDXInstance } from "astro";
 
-const allPosts: MDXInstance<MyPost>[] = Object.values(
+const allPosts: MDXInstance<PostFrontmatter>[] = Object.values(
   import.meta.glob(["./posts/**/*.{md,mdx}", "!./posts/**/_*.{md,mdx}"], {
     eager: true,
   }),
@@ -16,8 +16,6 @@ const tags = ["frontend", "web", "javascript", "html", "css"];
 <Layout
   title={title}
   description={description}
-  pubDate="2024-07-21"
-  updatedDate="2024-07-21"
   tags={tags.join(", ")}
 >
   <h1>Today I learned.</h1>
@@ -42,7 +40,6 @@ const tags = ["frontend", "web", "javascript", "html", "css"];
         ))
     }
   </ul>
-
   <nav class="more">
     <a href="/til/1">
       Read more

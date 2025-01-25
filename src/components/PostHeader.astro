@@ -1,0 +1,62 @@
+---
+interface Props {
+  title: string;
+  pubDate: string;
+  updatedDate: string;
+  tags: string[];
+}
+
+const { title, pubDate, updatedDate, tags } = Astro.props;
+const hasUpdatedDate = pubDate !== updatedDate;
+---
+
+<section>
+  <dl class="tags">
+    <div>
+      <dt>Published</dt>
+      <dd><time datetime={pubDate}>{pubDate}</time></dd>
+    </div>
+    {hasUpdatedDate && (
+      <div>
+        <dt>Updated</dt>
+        <dd>
+          <time datetime={updatedDate}>{updatedDate}</time>
+        </dd>
+      </div>
+    )}
+    <div>
+      <dt>Tags</dt>
+      <dd>
+        {tags.map((tag, i) => (
+          <>
+            <a href={`/til/tags/${tag}`}>{tag}</a>
+            {i < tags.length - 1 && " , "}
+          </>
+        ))}
+      </dd>
+    </div>
+  </dl>
+  <h1>{title}</h1>
+</section>
+
+<style>
+  .tags {
+    font-size: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+
+    > div {
+      display: flex;
+      gap: 0.5em;
+    }
+
+    dt::after {
+      content: ":";
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+</style>
