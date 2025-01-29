@@ -1,12 +1,13 @@
 ---
 interface Props {
   title: string;
+  description: string;
   pubDate: string;
   updatedDate: string;
   tags: string[];
 }
 
-const { title, pubDate, updatedDate, tags } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = Astro.props;
 const hasUpdatedDate = pubDate !== updatedDate;
 ---
 
