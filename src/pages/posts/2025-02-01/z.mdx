@@ -1,0 +1,40 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2025-02-01"
+updatedDate: "2025-02-01"
+title: "Jump Around In Computer With Z"
+description: "Learn how to use Z to jump around quickly in computer."
+tags: ["z", "terminal"]
+---
+
+import PostHeader from '../../../components/PostHeader.astro'
+
+<PostHeader {...frontmatter} />
+
+## What is Z?
+
+Z is a command-line utility that allows you to navigate your filesystem. It keeps track of the directories you visit and ranks them based on how often you access them. By using the `z` command, you can quickly jump to your desired directory without typing the full path.
+
+## How to Install Z?
+
+I install Z using Homebrew following the instructions from the [https://formulae.brew.sh/formula/z](https://formulae.brew.sh/formula/z).
+
+```bash
+brew install z
+```
+
+After installing, i need to add the following line to your shell configuration file (e.g., `~/.bashrc` or `~/.zshrc`):
+
+```bash
+. $HOMEBREW_PREFIX/etc/profile.d/z.sh
+```
+
+## How to Use Z?
+
+First, navigate to any directory using the `cd` command. Then, use the `z` command followed by the directory name you want to jump to. Z will search for the directory and jump to it if found.
+
+```bash
+z Desktop
+```
+
+Enjoy using Z!
