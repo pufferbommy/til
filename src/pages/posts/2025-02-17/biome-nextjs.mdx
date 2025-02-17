@@ -1,0 +1,92 @@
+---
+layout: ../../../layouts/Layout.astro
+pubDate: "2025-02-17"
+updatedDate: "2025-02-17"
+title: "Setting Up Biome with Next.js"
+description: "Learn how to set up Biome with Next.js for faster development."
+tags: ["biome", "nextjs"]
+---
+
+import PostHeader from '../../../components/PostHeader.astro'
+
+<PostHeader {...frontmatter} />
+
+## What is Biome?
+
+Biome is a tool for linting and formatting code. It combines the functionalities of ESLint and Prettier, helping developers maintain a consistent code style across thier projects.
+
+## Setting Up Biome with Next.js
+
+To set up Biome with Next.js, you need to install the following packages:
+
+```bash
+npm install --save-dev --save-exact @biomejs/biome
+```
+
+`--save-dev` for development dependencies and `--save-exact` to ensure that the installed version is locked.
+
+Next, you need to run the following command to initialize Biome in your project:
+
+```bash
+npx @biomejs/biome init
+```
+
+This command will create a `.biome` directory in your project with the default configuration files.
+
+It will look something like this:
+
+```json
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git",
+    "useIgnoreFile": false
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": []
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "tab"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  }
+}
+```
+
+You can customize the configuration files to suit your project's needs.
+
+But my recommendation is set the `files.ignore` to `["node_modules", ".next"]` to ignore the node_modules and .next directories.
+
+```json
+{
+  "files": {
+    "ignoreUnknown": false,
+    "ignore": ["node_modules", ".next"]
+  }
+}
+```
+
+To check your project for linting and formatting issues, run the following command:
+
+```bash
+npx biome check .
+```
+
+This command will check all the files in your project for linting and formatting issues.
+
+Happy using Biome with Next.js!
